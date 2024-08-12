@@ -30,12 +30,14 @@ return {
 
 			local root_pattern = require("lspconfig.util").root_pattern
 
+      local home = os.getenv("HOME")
+
 			require("lspconfig").tsserver.setup({})
 			require("lspconfig").cssls.setup({})
 			require("lspconfig").volar.setup({
 				init_options = {
 					typescript = {
-						tsdk = "/home/rossi/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib",
+						tsdk = home .. "/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib",
 					},
 				},
 			})
