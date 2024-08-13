@@ -1,5 +1,6 @@
 return {
 	{ "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
+	{ "williamboman/mason-lspconfig.nvim" },
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -30,20 +31,32 @@ return {
 
 			local root_pattern = require("lspconfig.util").root_pattern
 
-      local home = os.getenv("HOME")
+			local home = os.getenv("HOME")
+
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"tsserver",
+					"cssls",
+					"volar",
+					"eslint",
+					"html",
+					"tailwindcss",
+				},
+			})
 
 			require("lspconfig").tsserver.setup({})
 			require("lspconfig").cssls.setup({})
 			require("lspconfig").volar.setup({
 				init_options = {
 					typescript = {
-						tsdk = home .. "/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib",
+						tsdk = home
+							.. "/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib",
 					},
 				},
 			})
 			require("lspconfig").eslint.setup({})
 			require("lspconfig").html.setup({})
-      require("lspconfig").tailwindcss.setup({})
+			require("lspconfig").tailwindcss.setup({})
 
 			local cmp = require("cmp")
 
