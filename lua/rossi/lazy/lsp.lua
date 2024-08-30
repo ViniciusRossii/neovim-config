@@ -29,9 +29,9 @@ return {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			})
 
-			local root_pattern = require("lspconfig.util").root_pattern
-
-			local home = os.getenv("HOME")
+			local mason_registry = require("mason-registry")
+			local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+				.. "/node_modules/@vue/language-server"
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -44,16 +44,20 @@ return {
 				},
 			})
 
-			require("lspconfig").tsserver.setup({})
-			require("lspconfig").cssls.setup({})
-			require("lspconfig").volar.setup({
+			require("lspconfig").tsserver.setup({
 				init_options = {
-					typescript = {
-						tsdk = home
-							.. "/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib",
+					plugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vue_language_server_path,
+							languages = { "vue" },
+						},
 					},
 				},
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 			})
+			require("lspconfig").cssls.setup({})
+			require("lspconfig").volar.setup({})
 			require("lspconfig").eslint.setup({})
 			require("lspconfig").html.setup({})
 			require("lspconfig").tailwindcss.setup({})
