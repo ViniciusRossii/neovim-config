@@ -24,7 +24,7 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 
 require('lazy').setup({
-	spec = 'rossi.lazy',
+	spec = 'rossi.plugins',
 	change_detection = { notify = false },
   checker = {
     enabled = true,
