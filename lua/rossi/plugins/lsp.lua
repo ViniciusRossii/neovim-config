@@ -35,7 +35,7 @@ return {
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"tsserver",
+					"ts_ls",
 					"cssls",
 					"volar",
 					"eslint",
@@ -44,7 +44,7 @@ return {
 				},
 			})
 
-			require("lspconfig").tsserver.setup({
+			require("lspconfig").ts_ls.setup({
 				init_options = {
 					plugins = {
 						{
