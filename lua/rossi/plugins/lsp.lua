@@ -55,6 +55,31 @@ return {
 					},
 				},
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+				require("lspconfig").emmet_ls.setup({
+					capabilities = capabilities,
+					filetypes = {
+						"css",
+						"eruby",
+						"html",
+						"javascript",
+						"javascriptreact",
+						"less",
+						"sass",
+						"typescript",
+						"scss",
+						"svelte",
+						"pug",
+						"typescriptreact",
+						"vue",
+					},
+					init_options = {
+						html = {
+							options = {
+								["bem.enabled"] = true,
+							},
+						},
+					},
+				}),
 			})
 			require("lspconfig").cssls.setup({})
 			require("lspconfig").volar.setup({})
