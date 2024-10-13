@@ -41,6 +41,7 @@ return {
 					"eslint",
 					"html",
 					"tailwindcss",
+					"emmet",
 				},
 			})
 
